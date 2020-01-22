@@ -29,8 +29,30 @@ for i in range(7):
 chromatic_flats.remove('Cb')
 chromatic_flats.remove('Fb')
 
+chromatic_flats.append(chromatic_flats.pop(0))
+
 print(chromatic_flats)
 print(chromatic_sharps)
+
+tuning_system = 2.0 ** (1.0/12.0)
+
+notes_hz_sharps = {}
+notes_hz_flats = {}
+
+a440 = 440.0
+
+for sharp, flat, i in zip(chromatic_sharps, chromatic_flats, range(len(chromatic_sharps))):
+    hz = a440 * (tuning_system ** i)
+    notes_hz_sharps[sharp] = hz
+    notes_hz_flats[flat] = hz
+
+
+print(notes_hz_sharps)
+print(notes_hz_flats)
+    
+    
+    
+    
 
 
 # ID the note closest to 20 Hz by using 1/2 freq octave rule
