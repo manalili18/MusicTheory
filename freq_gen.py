@@ -74,7 +74,7 @@ for note in note_freq:
     for freq in note_freq[note]:
         freq_note[freq] = note
 
-# add octave count and print
+# add octave count and #print
 
 cur_octave = 0
 
@@ -82,15 +82,12 @@ for freq in sorted(freq_note.keys()):
     cur_octave += 1 if freq_note[freq] == 'C' else 0
     freq_note[freq] = freq_note[freq] + str(cur_octave)
     formatted_line = str(freq_note[freq])+'\t'+str(freq)
-    print(formatted_line)
+    #print(formatted_line)
 
 
-# ID the note closest to 20 Hz by using 1/2 freq octave rule
-
-
-
-# for each of the 12 valid notes
-
-# use double octave rule to generate freq until 20kHz while identifying them
+def harmonic_series(fundamental):
+    return -1
+    
+    
 
 
