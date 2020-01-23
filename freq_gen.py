@@ -5,7 +5,7 @@
 # but I will be deriving them starting from A = 440 Hz because I find value
 # from understanding this process from the ground up
 
-# this program will generate valid notes from 20 Hz to 40 kHz
+# this program will generate valid notes from 20 Hz to 20 kHz
 
 # start with the 12 valid notes using 12-TET 
 start = 'A'
@@ -31,13 +31,13 @@ chromatic_flats.remove('Fb')
 
 chromatic_flats.append(chromatic_flats.pop(0))
 
-print(chromatic_flats)
-print(chromatic_sharps)
-
 tuning_system = 2.0 ** (1.0/12.0)
 
 notes_hz_sharps = {}
 notes_hz_flats = {}
+
+base_hz_sharps = {}
+base_hz_flats = {}
 
 a440 = 440.0
 
@@ -45,19 +45,52 @@ for sharp, flat, i in zip(chromatic_sharps, chromatic_flats, range(len(chromatic
     hz = a440 * (tuning_system ** i)
     notes_hz_sharps[sharp] = hz
     notes_hz_flats[flat] = hz
+    
+    cur_base_hz = hz
 
+    while cur_base_hz >= 40:
+        cur_base_hz /= 2
+        
+    base_hz_sharps[sharp] = cur_base_hz
+    base_hz_flats[flat] = cur_base_hz
 
-print(notes_hz_sharps)
-print(notes_hz_flats)
+note_freq = {}
+
+for note in base_hz_flats:
+    cur_freq = base_hz_flats[note]
+    cur_note_freqs = []
+    while cur_freq < 20000:
+        cur_note_freqs += [cur_freq]
+        cur_freq *= 2
+
+    note_freq[note] = cur_note_freqs
+
     
-    
-    
-    
+notes_sorted = ['E','F','Gb','G','Ab','A','Bb','B','C','Db','D','Eb']
+
+# invert dictionary
+freq_note = {}
+for note in note_freq:
+    for freq in note_freq[note]:
+        freq_note[freq] = note
+
+# add octave count and print
+
+cur_octave = 0
+
+for freq in sorted(freq_note.keys()):
+    cur_octave += 1 if freq_note[freq] == 'C' else 0
+    freq_note[freq] = freq_note[freq] + str(cur_octave)
+    formatted_line = str(freq_note[freq])+'\t'+str(freq)
+    print(formatted_line)
 
 
 # ID the note closest to 20 Hz by using 1/2 freq octave rule
+
+
+
 # for each of the 12 valid notes
 
-# use double octave rule to generate freq until 40kHz while identifying them
+# use double octave rule to generate freq until 20kHz while identifying them
 
 
