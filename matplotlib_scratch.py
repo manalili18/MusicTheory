@@ -56,18 +56,18 @@ for freq, intensity in zip(add_x,add_y):
     nearest_freq = find_nearest(sorted(graph_dict.keys()),freq)
     graph_dict[nearest_freq] += intensity 
 
-print(graph_dict)
+#print(graph_dict)
 
-x = []
-y = []
+def graph():
+    x = []
+    y = []
 
-for key in sorted(graph_dict.keys()):
-    x += [key]
-    y += [graph_dict[key]]
-    
-plt.plot(x,y)
-
-plt.show()
+    for key in sorted(graph_dict.keys()):
+        x += [key]
+        y += [graph_dict[key]]
+        
+    plt.plot(x,y)
+    plt.show()
 
 
 #plt.plot(x,y)
